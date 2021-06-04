@@ -18,40 +18,6 @@
   </main>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
-  <!--<script src="dist/main.js" type="module"></script>-->
-  <script>
-    const preview = document.getElementById('preview');
-    const textarea = document.getElementById('editor');
-
-    previewText = '# Title 1\n## Title 2\n### Title 3\n#### Title 4\n' +
-    '##### Title 5\n###### Title 6\n' +
-    '[Link to Google](https://google.com)\n' +
-    '\n`git push origin main`\n' +
-    '```js\nconst main = "Hello World!"\nconsole.log(main)\n```\n' +
-    '- list 1\n- list 2\n- list 3\n' +
-    '> blockquote\n' +
-    '\n![marcosadriano05](https://github.com/marcosadriano05.png)\n' +
-    '\n**Bolded text**\n'
-
-    textarea.value = previewText;
-    preview.innerHTML = marked(previewText)
-
-    function formatText(text) {
-      const separatedTextByEndLines = text.split('\n');
-
-      return separatedTextByEndLines.reduce((acc, cur) => acc + '\n' + cur);
-    }
-
-    function handleTextareaInput(event) {
-      const target = event.target;
-      const formatedText = formatText(target.value);
-
-      if (preview) {
-        preview.innerHTML = marked(formatedText);
-      }
-    }
-
-    textarea.addEventListener('input', handleTextareaInput);
-  </script>
+  <script src="dist/main.js" type="module"></script>
 </body>
 </html>
