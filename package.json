@@ -1,0 +1,12 @@
+{
+  "name": "markdown-previewer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/marcosadriano05/markdown-previewer",
+  "author": "Marcos Adriano <marcosadriano740@gmail.com>",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/marked": "^2.0.3"
+  }
+}
