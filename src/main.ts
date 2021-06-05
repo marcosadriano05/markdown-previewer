@@ -1,5 +1,6 @@
-const preview: HTMLElement | null = document.getElementById('preview');
 const textarea: HTMLElement | null = document.getElementById('editor');
+const preview: HTMLElement | null = document.getElementById('preview');
+const buttonsMaximize: NodeListOf<Element> = document.querySelectorAll('[data-maximize]');
 
 const previewText: string = '# Title 1\n## Title 2\n### Title 3\n#### Title 4\n' +
   '##### Title 5\n###### Title 6\n' +
@@ -36,3 +37,27 @@ function handleTextareaInput(this: HTMLElement, event: Event): void {
 }
 
 textarea?.addEventListener('input', handleTextareaInput);
+
+interface ButtonMaximize extends HTMLButtonElement {
+  dataset: {
+    maximize: string;
+  }
+}
+
+function handleButtonClick(this: HTMLElement, event: Event): void {
+  const elementType = event.target as HTMLElement;
+  let target: ButtonMaximize;
+
+  if (elementType.tagName === 'I') {
+    const parent = elementType.parentElement;
+    target = parent as ButtonMaximize;
+  } else {
+    target = event.target as ButtonMaximize;
+  }
+  
+  if (target.dataset.maximize === 'editor') {
+    console.log(target.dataset.maximize);
+  }
+}
+
+buttonsMaximize.forEach(button => button.addEventListener('click', handleButtonClick))

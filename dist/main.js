@@ -1,6 +1,7 @@
 "use strict";
-const preview = document.getElementById('preview');
 const textarea = document.getElementById('editor');
+const preview = document.getElementById('preview');
+const buttonsMaximize = document.querySelectorAll('[data-maximize]');
 const previewText = '# Title 1\n## Title 2\n### Title 3\n#### Title 4\n' +
     '##### Title 5\n###### Title 6\n' +
     '[Link to Google](https://google.com)\n' +
@@ -29,3 +30,18 @@ function handleTextareaInput(event) {
     }
 }
 textarea === null || textarea === void 0 ? void 0 : textarea.addEventListener('input', handleTextareaInput);
+function handleButtonClick(event) {
+    const elementType = event.target;
+    let target;
+    if (elementType.tagName === 'I') {
+        const parent = elementType.parentElement;
+        target = parent;
+    }
+    else {
+        target = event.target;
+    }
+    if (target.dataset.maximize === 'editor') {
+        console.log(target.dataset.maximize);
+    }
+}
+buttonsMaximize.forEach(button => button.addEventListener('click', handleButtonClick));
