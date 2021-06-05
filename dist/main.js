@@ -1,4 +1,6 @@
 "use strict";
+const editorContainer = document.getElementById('editor-container');
+const previewContainer = document.getElementById('preview-container');
 const textarea = document.getElementById('editor');
 const preview = document.getElementById('preview');
 const buttonsMaximize = document.querySelectorAll('[data-maximize]');
@@ -30,7 +32,9 @@ function handleTextareaInput(event) {
     }
 }
 textarea === null || textarea === void 0 ? void 0 : textarea.addEventListener('input', handleTextareaInput);
+let isMaximized = false;
 function handleButtonClick(event) {
+    isMaximized = !isMaximized;
     const elementType = event.target;
     let target;
     if (elementType.tagName === 'I') {
@@ -41,7 +45,24 @@ function handleButtonClick(event) {
         target = event.target;
     }
     if (target.dataset.maximize === 'editor') {
-        console.log(target.dataset.maximize);
+        if (isMaximized) {
+            editorContainer === null || editorContainer === void 0 ? void 0 : editorContainer.classList.remove('col-8');
+            editorContainer === null || editorContainer === void 0 ? void 0 : editorContainer.classList.add('col-12');
+            textarea === null || textarea === void 0 ? void 0 : textarea.setAttribute('rows', '30');
+            target.innerHTML = '<i class="fas fa-compress-alt"></i>';
+            if (previewContainer) {
+                previewContainer.style.display = 'none';
+            }
+        }
+        else {
+            editorContainer === null || editorContainer === void 0 ? void 0 : editorContainer.classList.remove('col-12');
+            editorContainer === null || editorContainer === void 0 ? void 0 : editorContainer.classList.add('col-8');
+            textarea === null || textarea === void 0 ? void 0 : textarea.setAttribute('rows', '10');
+            target.innerHTML = '<i class="fas fa-expand-arrows-alt"></i>';
+            if (previewContainer) {
+                previewContainer.style.display = 'block';
+            }
+        }
     }
 }
 buttonsMaximize.forEach(button => button.addEventListener('click', handleButtonClick));

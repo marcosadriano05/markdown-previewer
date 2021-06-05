@@ -1,3 +1,5 @@
+const editorContainer: HTMLElement | null= document.getElementById('editor-container');
+const previewContainer: HTMLElement | null= document.getElementById('preview-container');
 const textarea: HTMLElement | null = document.getElementById('editor');
 const preview: HTMLElement | null = document.getElementById('preview');
 const buttonsMaximize: NodeListOf<Element> = document.querySelectorAll('[data-maximize]');
@@ -44,7 +46,10 @@ interface ButtonMaximize extends HTMLButtonElement {
   }
 }
 
+let isMaximized: boolean = false;
 function handleButtonClick(this: HTMLElement, event: Event): void {
+  isMaximized = !isMaximized;
+
   const elementType = event.target as HTMLElement;
   let target: ButtonMaximize;
 
@@ -56,7 +61,23 @@ function handleButtonClick(this: HTMLElement, event: Event): void {
   }
   
   if (target.dataset.maximize === 'editor') {
-    console.log(target.dataset.maximize);
+    if (isMaximized) {
+      editorContainer?.classList.remove('col-8');
+      editorContainer?.classList.add('col-12');
+      textarea?.setAttribute('rows', '30');
+      target.innerHTML = '<i class="fas fa-compress-alt"></i>';
+      if (previewContainer) {
+        previewContainer.style.display = 'none';
+      }
+    } else {
+      editorContainer?.classList.remove('col-12');
+      editorContainer?.classList.add('col-8');
+      textarea?.setAttribute('rows', '10');
+      target.innerHTML = '<i class="fas fa-expand-arrows-alt"></i>';
+      if (previewContainer) {
+        previewContainer.style.display = 'block';
+      }
+    }
   }
 }
 
