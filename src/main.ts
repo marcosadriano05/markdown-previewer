@@ -79,6 +79,24 @@ function handleButtonClick(this: HTMLElement, event: Event): void {
       }
     }
   }
+
+  if (target.dataset.maximize === 'preview') {
+    if (isMaximized) {
+      previewContainer?.classList.remove('col-10');
+      previewContainer?.classList.add('col-12');
+      target.innerHTML = '<i class="fas fa-compress-alt"></i>';
+      if (editorContainer) {
+        editorContainer.style.display = 'none';
+      }
+    } else {
+      previewContainer?.classList.remove('col-12');
+      previewContainer?.classList.add('col-10');
+      target.innerHTML = '<i class="fas fa-expand-arrows-alt"></i>';
+      if (editorContainer) {
+        editorContainer.style.display = 'block';
+      }
+    }
+  }
 }
 
 buttonsMaximize.forEach(button => button.addEventListener('click', handleButtonClick))
